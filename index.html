@@ -7,87 +7,62 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap');
-
-        :root {
-            --gold: #8b6914; 
-        }
+        :root { --gold: #8b6914; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body, html { height: 100%; overflow: hidden; background-color: #000; font-family: 'Noto Serif SC', serif; }
+        
         .swiper { width: 100%; height: 100%; }
         
+        /* 每一页背景图设置 */
         .swiper-slide {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             background-size: cover;
             background-position: center top;
             background-repeat: no-repeat;
             position: relative;
         }
 
-        /* 二维码容器适配方案 */
+        /* 二维码容器调整：位置大幅上移，尺寸放大 */
         .qr-container {
             position: absolute;
-            top: 18%;      
-            left: 50%;
+            top: 18%;      /* 再次大幅上移（之前是 25%） */
+            left: 62%;     /* 向右微调，避开左侧文字 */
             transform: translateX(-50%);
-            width: 55%;    
+            width: 58%;    /* 二维码显示更大 */
             aspect-ratio: 1 / 1; 
             z-index: 100;
-            background-color: rgba(248, 242, 227, 0.92); 
-            padding: 15px;
+            background-color: rgba(248, 242, 227, 0.98); 
+            padding: 10px;
             border-radius: 4px;
             border: 1px solid rgba(139, 105, 20, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
             text-align: center;
-            animation: qrFade 3s ease-in-out infinite;
         }
 
-        @keyframes qrFade {
-            0%, 100% { opacity: 0.95; transform: translateX(-50%) scale(1); }
-            50% { opacity: 1; transform: translateX(-50%) scale(1.02); }
-        }
-
-        /* 引用你上传到 GitHub 的 qr.jpg */
         .real-qr-img {
             width: 100%;
             height: auto;
             display: block;
-            margin: 0 auto 8px;
-            border: 1px solid #eee;
+            margin: 0 auto 5px;
         }
 
         .qr-tip-zh {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--gold);
-            letter-spacing: 2px;
-            margin-top: 5px;
+            letter-spacing: 1px;
             font-weight: 700;
         }
 
-        .qr-sub-tip {
-            font-size: 0.6rem; 
-            color: #666; 
-            margin-top: 2px;
-            letter-spacing: 1px;
-        }
-
+        /* 向上滑动提示 */
         .up-arrow {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            z-index: 10;
-            animation: bounce 2s infinite;
-            opacity: 0.6;
-            pointer-events: none;
+            position: absolute; bottom: 25px; left: 50%;
+            transform: translateX(-50%); width: 30px; height: 30px;
+            z-index: 10; animation: bounce 2s infinite; opacity: 0.6;
         }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
             40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
         }
     </style>
 </head>
@@ -100,9 +75,8 @@
         
         <div class="swiper-slide" style="background-image: url('bg3.jpg');">
             <div class="qr-container">
-                <img src="qr.jpg" alt="爱心认捐二维码" class="real-qr-img">
-                <div class="qr-tip-zh">愛心認捐 · 善款直達</div>
-                <div class="qr-sub-tip">· 長按識別二维码 ·</div>
+                <img src="qr.jpg" alt="爱心认捐" class="real-qr-img">
+                <div class="qr-tip-zh">長按識別 · 善款直達</div>
             </div>
         </div>
         
@@ -110,7 +84,7 @@
     </div>
     
     <div class="up-arrow">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
             <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
     </div>
