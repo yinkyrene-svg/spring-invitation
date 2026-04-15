@@ -22,14 +22,13 @@
             position: relative;
         }
 
-        /* 修正后的二维码容器位置 */
+        /* 二维码定位：放回原位（偏上）并向右偏移 */
         .qr-container {
             position: absolute;
-            /* 向上移动：top 减小到 35% | 向右偏移：left 增加到 58% */
-            top: 35%;      
-            left: 58%;
+            top: 36%;      /* 向上移动，避开银行文字 */
+            left: 58%;     /* 向右偏移，不放在正中间 */
             transform: translateX(-50%);
-            width: 38%;    
+            width: 38%;    /* 缩小尺寸 */
             aspect-ratio: 1 / 1; 
             z-index: 100;
             background-color: rgba(248, 242, 227, 0.96); 
@@ -38,12 +37,6 @@
             border: 1px solid rgba(139, 105, 20, 0.3);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
-            animation: qrFade 3s ease-in-out infinite;
-        }
-
-        @keyframes qrFade {
-            0%, 100% { opacity: 0.95; transform: translateX(-50%) scale(1); }
-            50% { opacity: 1; transform: translateX(-50%) scale(1.02); }
         }
 
         .real-qr-img {
@@ -60,7 +53,6 @@
             font-weight: 700;
         }
 
-        /* 滑动提示箭头 */
         .up-arrow {
             position: absolute; bottom: 25px; left: 50%;
             transform: translateX(-50%); width: 30px; height: 30px;
