@@ -22,13 +22,14 @@
             position: relative;
         }
 
-        /* 优化后的二维码容器：在银行信息正上方 */
+        /* 修正后的二维码容器位置 */
         .qr-container {
             position: absolute;
-            top: 41%;      /* 根据背景图文字位置微调，确保在银行信息上方 */
-            left: 50%;
+            /* 向上移动：top 减小到 35% | 向右偏移：left 增加到 58% */
+            top: 35%;      
+            left: 58%;
             transform: translateX(-50%);
-            width: 38%;    /* 缩小尺寸，视觉更精致 */
+            width: 38%;    
             aspect-ratio: 1 / 1; 
             z-index: 100;
             background-color: rgba(248, 242, 227, 0.96); 
@@ -37,6 +38,12 @@
             border: 1px solid rgba(139, 105, 20, 0.3);
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
+            animation: qrFade 3s ease-in-out infinite;
+        }
+
+        @keyframes qrFade {
+            0%, 100% { opacity: 0.95; transform: translateX(-50%) scale(1); }
+            50% { opacity: 1; transform: translateX(-50%) scale(1.02); }
         }
 
         .real-qr-img {
@@ -44,7 +51,6 @@
             height: auto;
             display: block;
             margin: 0 auto 5px;
-            /* 提示：这里无法通过 pointer-events 禁止转发，因为那样也会禁止识别 */
         }
 
         .qr-tip-zh {
@@ -54,6 +60,7 @@
             font-weight: 700;
         }
 
+        /* 滑动提示箭头 */
         .up-arrow {
             position: absolute; bottom: 25px; left: 50%;
             transform: translateX(-50%); width: 30px; height: 30px;
@@ -69,15 +76,17 @@
 
 <div class="swiper mySwiper">
     <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image: url('图片1 封面.jpg');"></div>
-        <div class="swiper-slide" style="background-image: url('图片2 缘起.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('bg1.jpg');"></div>
+        <div class="swiper-slide" style="background-image: url('bg2.jpg');"></div>
+        
         <div class="swiper-slide" style="background-image: url('bg3.jpg');">
             <div class="qr-container">
                 <img src="qr.jpg" alt="爱心认捐" class="real-qr-img">
                 <div class="qr-tip-zh">長按識別 · 善款直達</div>
             </div>
         </div>
-        <div class="swiper-slide" style="background-image: url('图片4 结缘.jpg');"></div>
+        
+        <div class="swiper-slide" style="background-image: url('bg4.jpg');"></div>
     </div>
     <div class="up-arrow">
         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
@@ -88,6 +97,7 @@
 <script>
     var swiper = new Swiper(".mySwiper", {
         direction: "vertical",
+        mousewheel: true,
         resistanceRatio: 0.5
     });
 </script>
